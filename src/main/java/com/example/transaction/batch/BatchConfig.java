@@ -65,7 +65,7 @@ public class BatchConfig {
     public FlatFileItemReader<TransactionDTO> fileReader() {
         FlatFileItemReader<TransactionDTO> reader = new FlatFileItemReader<>();
         reader.setResource(new FileSystemResource("dataSource.txt")); // Path to the file
-        reader.setLineMapper(new DefaultLineMapper<TransactionDTO>() {{
+        reader.setLineMapper(new DefaultLineMapper<>() {{
             setLineTokenizer(lineTokenizer());
             setFieldSetMapper(fieldSetMapper());
         }});
@@ -90,7 +90,7 @@ public class BatchConfig {
 
     @Bean
     public ItemProcessor<TransactionDTO, Transaction> transactionProcessor() {
-        return new ItemProcessor<TransactionDTO, Transaction>() {
+        return new ItemProcessor<>() {
             @Override
             public Transaction process(TransactionDTO record) throws Exception {
                 Transaction transaction = new Transaction();
@@ -114,7 +114,7 @@ public class BatchConfig {
 
     @Bean
     public ItemWriter<Transaction> transactionWriter() {
-        return new ListItemWriter<Transaction>() {
+        return new ListItemWriter<>() {
 
             @Autowired
             private TransactionRepository transactionRepository;
