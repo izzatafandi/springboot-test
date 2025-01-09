@@ -25,5 +25,5 @@ public class BatchJobController {
             e.printStackTrace();
             return "Failed to start Batch Job: " + e.getMessage();
         }
-    } //no need? use command line <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< TODO
+    }
 }
