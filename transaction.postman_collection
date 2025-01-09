@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "1068b6b6-87f2-4a87-8a76-1cfdb2d0dee8",
+		"name": "Test Transaction",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "40237893"
+	},
+	"item": [
+		{
+			"name": "all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/transactions"
+			},
+			"response": []
+		},
+		{
+			"name": "by customerId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/customer/:customerId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"customer",
+						":customerId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "222"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "by account number(s)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/accounts?accountNumbers=8872838299,6872838260",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"accounts"
+					],
+					"query": [
+						{
+							"key": "accountNumbers",
+							"value": "8872838299,6872838260"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "by description (wildcard)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/description?description=3rd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						"description"
+					],
+					"query": [
+						{
+							"key": "description",
+							"value": "3rd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "description by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Mia Robinson\",\r\n    \"department\": \"Logistics\",\r\n    \"email\": \"miarobinson@example.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transactions/:id?description=new FUND TRANSFER&version=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transactions",
+						":id"
+					],
+					"query": [
+						{
+							"key": "description",
+							"value": "new FUND TRANSFER"
+						},
+						{
+							"key": "version",
+							"value": "0"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "execute batch job",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/run-batch-job"
+			},
+			"response": []
+		}
+	]
+}
