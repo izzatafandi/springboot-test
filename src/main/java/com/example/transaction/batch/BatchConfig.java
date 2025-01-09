@@ -38,9 +38,6 @@ import java.time.format.DateTimeFormatter;
 public class BatchConfig {
 
     @Autowired
-    private DataSource dataSource;
-
-    @Autowired
     private PlatformTransactionManager transactionManager;
 
     @Autowired
@@ -67,7 +64,7 @@ public class BatchConfig {
     @Bean
     public FlatFileItemReader<TransactionDTO> fileReader() {
         FlatFileItemReader<TransactionDTO> reader = new FlatFileItemReader<>();
-        reader.setResource(new FileSystemResource("transactions.txt")); // Path to the file
+        reader.setResource(new FileSystemResource("dataSource.txt")); // Path to the file
         reader.setLineMapper(new DefaultLineMapper<TransactionDTO>() {{
             setLineTokenizer(lineTokenizer());
             setFieldSetMapper(fieldSetMapper());
@@ -123,16 +120,9 @@ public class BatchConfig {
             private TransactionRepository transactionRepository;
 
             @Override
-            public void write(Chunk<? extends Transaction> items) throws Exception {
+            public void write(Chunk<? extends Transaction> items) {
                 transactionRepository.saveAll(items);
             }
-        };
-    }
-
-    @Bean
-    public Tasklet stepTasklet() {
-        return (contribution, chunkContext) -> {
-            return RepeatStatus.FINISHED;
         };
     }
 }
